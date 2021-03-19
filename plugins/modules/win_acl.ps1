@@ -84,6 +84,7 @@ $params = Parse-Args $args
 
 # Get the path parameter with expanded environment variables.
 $path=Get-AnsibleParam -obj $params -name "path" -type "str" -failifempty $true
+$path = (New-Object -ComObject Wscript.Shell).ExpandEnvironmentStrings($path)
 # We mount the HKCR, HKU, and HKCC registry hives so PS can access them.
 # Network paths have no qualifiers so we use -EA SilentlyContinue to ignore that
 $path_qualifier = Split-Path -Path $path -Qualifier -ErrorAction SilentlyContinue
