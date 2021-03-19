@@ -7,6 +7,12 @@
   - absent
   - directory
 
+- name: set testpath environment variable
+  win_shell: [Environment]::SetEnvironmentVariable('testpath', '{{ test_acl_path }}', 'Machine')
+
+- name: set ansible variable
+  set_fact: test_acl_path_env="%testpath%"
+
 - name: ensure we start with a clean reg path
   win_regedit:
     path: '{{ test_acl_reg_path }}'
@@ -21,6 +27,9 @@
     include_tasks: tests.yml
 
   always:
+  - name: Clean environment variable
+    win_shell: [Environment]::SetEnvironmentVariable('testpath', '', 'Machine')
+
   - name: cleanup testing dir
     win_file:
       path: '{{ test_acl_path }}'
