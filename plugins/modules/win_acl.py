@@ -18,7 +18,8 @@ description:
 options:
   path:
     description:
-    - The path to the file or directory.
+    - The path to the file, directory, registry key or network UNC.
+    - Supports environment variables.
     type: str
     required: yes
   user:
