@@ -56,7 +56,7 @@
 
 - name: add write rights to Guest
   win_acl:
-    path: '{{ test_acl_path }}'
+    path: '{{ test_acl_path_env }}'
     type: allow
     user: Guests
     rights: Write
@@ -79,7 +79,7 @@
 
 - name: add write rights to Guest (idempotent)
   win_acl:
-    path: '{{ test_acl_path }}'
+    path: '{{ test_acl_path_env }}'
     type: allow
     user: Guests
     rights: Write
